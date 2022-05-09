@@ -53,3 +53,4 @@ FontWeight black = FontWeight.w900;
 //default radius and margin
 final double defaultRadius = 16;
 final double defaultMargin = 50;
+final double smallLogo = 52;

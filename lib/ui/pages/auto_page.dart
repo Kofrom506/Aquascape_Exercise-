@@ -6,10 +6,49 @@ class AutoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 329,
-      height: 76,
-      decoration: BoxDecoration(gradient: blueGradient),
+    return Scaffold(
+      backgroundColor: cBlackColor,
+      body: Container(
+        margin: EdgeInsets.all(defaultMargin),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child: Row(
+                  children: [
+                    Container(
+                      width: smallLogo,
+                      height: smallLogo,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/logo.png'),
+                              fit: BoxFit.cover)),
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      'AQUALED',
+                      style: WhiteFont.copyWith(
+                          fontSize: 22, fontWeight: bold, letterSpacing: 0.35),
+                    ),
+                  ],
+                )),
+                Container(
+                  width: 17,
+                  height: 17,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/setting.png'),
+                          fit: BoxFit.cover)),
+                ),
+              ],
+            ),
+            //logo aquascape
+          ],
+        ),
+      ),
     );
   }
 }
