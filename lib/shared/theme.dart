@@ -40,6 +40,7 @@ LinearGradient blueGradient = LinearGradient(
 //Font
 TextStyle WhiteFont = GoogleFonts.inter(color: cWhiteColor);
 TextStyle greyFont = GoogleFonts.inter(color: cManualGreyColor);
+TextStyle blackFont = GoogleFonts.inter(color: cBlackColor);
 
 //Font weight
 FontWeight light = FontWeight.w300;
