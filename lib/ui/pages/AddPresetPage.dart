@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AddPresetPage extends StatefulWidget {
   @override
@@ -188,82 +189,112 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       ),
                       ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 27, vertical: 17),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'from',
-                                      style: WhiteFont.copyWith(fontSize: 13),
-                                    ),
-                                    GestureDetector(
-                                        onTap: () => iosDatePicker(context),
-                                        child: Text(
-                                          DateFormat('hh:mm a')
-                                              .format(chosenDateTime),
-                                          style: WhiteFont.copyWith(
-                                              fontSize: 20, fontWeight: medium),
-                                        )),
-                                    Text(
-                                      'to',
-                                      style: WhiteFont.copyWith(fontSize: 13),
-                                    ),
-                                    GestureDetector(
-                                        onTap: () => iosDatePicker(context),
-                                        child: Text(
-                                          DateFormat('hh:mm a')
-                                              .format(chosenDateTime),
-                                          style: WhiteFont.copyWith(
-                                              fontSize: 20, fontWeight: medium),
-                                        )),
-                                  ],
+                          return Slidable(
+                            key: Key(entries[index]),
+                            endActionPane: ActionPane(
+                                dismissible: DismissiblePane(
+                                  onDismissed: () {
+                                    setState(() {
+                                      entries.removeAt(index);
+                                    });
+                                  },
                                 ),
-                                SizedBox(
-                                  height: 28,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Intensity',
-                                      style: WhiteFont.copyWith(
-                                          fontSize: 16, fontWeight: bold),
-                                    ),
-                                    Text(
-                                      '${value}%',
-                                      style: WhiteFont.copyWith(
-                                          fontSize: 12, fontWeight: medium),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 9,
-                                ),
-                                SliderTheme(
-                                  data: SliderThemeData(
-                                      trackHeight: 55.13,
-                                      inactiveTrackColor: cBlackColor,
-                                      activeTickMarkColor: cWhiteColor,
-                                      inactiveTickMarkColor: cWhiteColor,
-                                      activeTrackColor: cLightOrange,
-                                      thumbShape: SliderComponentShape.noThumb,
-                                      tickMarkShape: RoundSliderTickMarkShape(
-                                          tickMarkRadius: 2)),
-                                  child: Slider(
-                                      value: value,
-                                      min: 0,
-                                      max: 100,
-                                      divisions: 5,
-                                      onChanged: (value) =>
-                                          setState(() => this.value = value)),
-                                ),
-                              ],
+                                extentRatio: 0.25,
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    label: "delete",
+                                    backgroundColor: Colors.white,
+                                    icon: Icons.delete,
+                                    onPressed: (context) {
+                                      setState(() {
+                                        entries.removeAt(index);
+                                      });
+                                    },
+                                    borderRadius:
+                                        BorderRadius.circular(defaultRadius),
+                                  ),
+                                ]),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 27, vertical: 17),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'from',
+                                        style: WhiteFont.copyWith(fontSize: 13),
+                                      ),
+                                      GestureDetector(
+                                          onTap: () => iosDatePicker(context),
+                                          child: Text(
+                                            DateFormat('hh:mm a')
+                                                .format(chosenDateTime),
+                                            style: WhiteFont.copyWith(
+                                                fontSize: 20,
+                                                fontWeight: medium),
+                                          )),
+                                      Text(
+                                        'to',
+                                        style: WhiteFont.copyWith(fontSize: 13),
+                                      ),
+                                      GestureDetector(
+                                          onTap: () => iosDatePicker(context),
+                                          child: Text(
+                                            DateFormat('hh:mm a')
+                                                .format(chosenDateTime),
+                                            style: WhiteFont.copyWith(
+                                                fontSize: 20,
+                                                fontWeight: medium),
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 28,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Intensity',
+                                        style: WhiteFont.copyWith(
+                                            fontSize: 16, fontWeight: bold),
+                                      ),
+                                      Text(
+                                        '${value}%',
+                                        style: WhiteFont.copyWith(
+                                            fontSize: 12, fontWeight: medium),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 9,
+                                  ),
+                                  SliderTheme(
+                                    data: SliderThemeData(
+                                        trackHeight: 55.13,
+                                        inactiveTrackColor: cBlackColor,
+                                        activeTickMarkColor: cWhiteColor,
+                                        inactiveTickMarkColor: cWhiteColor,
+                                        activeTrackColor: cLightOrange,
+                                        thumbShape:
+                                            SliderComponentShape.noThumb,
+                                        tickMarkShape: RoundSliderTickMarkShape(
+                                            tickMarkRadius: 2)),
+                                    child: Slider(
+                                        value: value,
+                                        min: 0,
+                                        max: 100,
+                                        divisions: 5,
+                                        onChanged: (value) =>
+                                            setState(() => this.value = value)),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
