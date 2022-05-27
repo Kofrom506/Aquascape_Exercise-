@@ -1,9 +1,11 @@
+import 'package:aquascape_exercise/model/preset_model.dart';
 import 'package:aquascape_exercise/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:uuid/uuid.dart';
 
 class AddPresetPage extends StatefulWidget {
   @override
@@ -14,15 +16,33 @@ class _AddPresetPageState extends State<AddPresetPage> {
   final TextEditingController presetNameController =
       TextEditingController(text: '');
 
-  final List<String> entries = <String>['A', 'B'];
+  var uuid = Uuid();
 
-  final List<int> colorCodes = <int>[600, 500, 100];
+  List<ScheduleModel> presets = <ScheduleModel>[
+    ScheduleModel(
+      'initpreset',
+      scheduleId: 'initsched',
+    )
+  ];
 
-  DateTime chosenDateTime = DateTime.now();
+  String presetName = 'Name';
 
-  double value = 50;
+//BELUM ASSIGN PRESET NAME KE PRESET MODEL
+  @override
+  void initState() {
+    presetNameController.addListener(() {
+      //use setState to rebuild the widget
+      setState(() {
+        presetName = presetNameController.text;
+        for (ScheduleModel schedule in presets) {
+          schedule.presetName = presetName;
+        }
+      });
+    });
+    super.initState();
+  }
 
-  iosDatePicker(BuildContext context) {
+  iosDatePicker(BuildContext context, int index, bool isStartActive) {
     showCupertinoModalPopup(
         context: context,
         builder: (context) => CupertinoActionSheet(
@@ -31,8 +51,9 @@ class _AddPresetPageState extends State<AddPresetPage> {
                   height: 180,
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.time,
-                    onDateTimeChanged: (value) =>
-                        setState(() => chosenDateTime = value),
+                    onDateTimeChanged: (value) => setState(() => isStartActive
+                        ? (presets[index].startActive = value)
+                        : (presets[index].endActive = value)),
                     initialDateTime: DateTime.now(),
                   ),
                 ),
@@ -133,7 +154,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           width: 12,
                         ),
                         Text(
-                          'Name',
+                          presetName,
                           style: WhiteFont.copyWith(
                               fontSize: 22, fontWeight: bold),
                         )
@@ -190,12 +211,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
                           return Slidable(
-                            key: Key(entries[index]),
+                            key: Key(presets[index].scheduleId),
                             endActionPane: ActionPane(
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
                                     setState(() {
-                                      entries.removeAt(index);
+                                      presets.removeAt(index);
                                     });
                                   },
                                 ),
@@ -208,7 +229,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     icon: Icons.delete,
                                     onPressed: (context) {
                                       setState(() {
-                                        entries.removeAt(index);
+                                        presets.removeAt(index);
                                       });
                                     },
                                     borderRadius:
@@ -229,10 +250,11 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                         style: WhiteFont.copyWith(fontSize: 13),
                                       ),
                                       GestureDetector(
-                                          onTap: () => iosDatePicker(context),
+                                          onTap: () => iosDatePicker(
+                                              context, index, true),
                                           child: Text(
-                                            DateFormat('hh:mm a')
-                                                .format(chosenDateTime),
+                                            DateFormat('hh:mm a').format(
+                                                presets[index].startActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 20,
                                                 fontWeight: medium),
@@ -242,10 +264,11 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                         style: WhiteFont.copyWith(fontSize: 13),
                                       ),
                                       GestureDetector(
-                                          onTap: () => iosDatePicker(context),
+                                          onTap: () => iosDatePicker(
+                                              context, index, false),
                                           child: Text(
-                                            DateFormat('hh:mm a')
-                                                .format(chosenDateTime),
+                                            DateFormat('hh:mm a').format(
+                                                presets[index].endActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 20,
                                                 fontWeight: medium),
@@ -265,7 +288,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                             fontSize: 16, fontWeight: bold),
                                       ),
                                       Text(
-                                        '${value}%',
+                                        '${presets[index].intensity}%',
                                         style: WhiteFont.copyWith(
                                             fontSize: 12, fontWeight: medium),
                                       ),
@@ -286,12 +309,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                         tickMarkShape: RoundSliderTickMarkShape(
                                             tickMarkRadius: 2)),
                                     child: Slider(
-                                        value: value,
+                                        value: presets[index].intensity,
                                         min: 0,
                                         max: 100,
                                         divisions: 5,
-                                        onChanged: (value) =>
-                                            setState(() => this.value = value)),
+                                        onChanged: (value) => setState(() =>
+                                            presets[index].intensity = value)),
                                   ),
                                 ],
                               ),
@@ -307,7 +330,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           endIndent: 27,
                         ),
                         padding: const EdgeInsets.all(8),
-                        itemCount: entries.length,
+                        itemCount: presets.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                       ),
@@ -335,7 +358,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              entries.add('Z');
+                              presets.add(ScheduleModel('initpreset',
+                                  scheduleId: uuid.v1()));
                             });
                           },
                         ),
