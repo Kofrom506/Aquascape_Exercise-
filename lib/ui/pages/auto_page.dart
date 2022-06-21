@@ -55,26 +55,29 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
             Row(
               children: [
                 Expanded(
-                    child: Row(
-                  children: [
-                    Container(
-                      width: smallLogo,
-                      height: smallLogo,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/logo.png'),
-                              fit: BoxFit.cover)),
-                    ),
-                    SizedBox(
-                      width: 6,
-                    ),
-                    Text(
-                      'AQUALED',
-                      style: WhiteFont.copyWith(
-                          fontSize: 22, fontWeight: bold, letterSpacing: 0.35),
-                    ),
-                  ],
-                )),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: smallLogo,
+                        height: smallLogo,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/logo.png'),
+                                fit: BoxFit.cover)),
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                        'AQUALED',
+                        style: WhiteFont.copyWith(
+                            fontSize: 22,
+                            fontWeight: bold,
+                            letterSpacing: 0.35),
+                      ),
+                    ],
+                  ),
+                ),
                 Container(
                   width: 17,
                   height: 17,
