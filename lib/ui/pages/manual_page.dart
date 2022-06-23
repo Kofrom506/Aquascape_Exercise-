@@ -5,13 +5,14 @@ class ManualPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
       decoration: BoxDecoration(),
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            // margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -83,7 +84,7 @@ class ManualPage extends StatelessWidget {
           ),
           SizedBox(height: 22),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            // margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -186,16 +187,47 @@ class _SSlideState extends State<SSlide> {
 
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      value: _currentSliderValue,
-      // thumbColor: cDarkOrange,
-      activeColor: cDarkOrange,
-      max: 100,
-      divisions: 100,
-      label: _currentSliderValue.round().toString(),
-      onChanged: (double value) {
-        setState(() => _currentSliderValue = value);
-      },
+    return Column(
+      children: [
+        Container(
+          child: Row(
+            children: [
+              Expanded(
+                  child: Text('Intensity',
+                      style:
+                          WhiteFont.copyWith(fontSize: 22, fontWeight: bold))),
+              Text(
+                '$_currentSliderValue%',
+                style: WhiteFont.copyWith(fontWeight: medium),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 25,
+        ),
+        Slider(
+          value: _currentSliderValue,
+          activeColor: cDarkOrange,
+          max: 100,
+          divisions: 100,
+          label: _currentSliderValue.round().toString(),
+          onChanged: (double value) {
+            setState(() => _currentSliderValue = value.roundToDouble());
+          },
+        ),
+      ],
     );
+    // Slider(
+    //   value: _currentSliderValue,
+    //   // thumbColor: cDarkOrange,
+    //   activeColor: cDarkOrange,
+    //   max: 100,
+    //   divisions: 100,
+    //   label: _currentSliderValue.round().toString(),
+    //   onChanged: (double value) {
+    //     setState(() => _currentSliderValue = value);
+    //   },
+    // );
   }
 }
