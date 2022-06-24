@@ -1,4 +1,5 @@
 import 'package:aquascape_exercise/shared/theme.dart';
+import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:flutter/material.dart';
 
 class AutoPage extends StatefulWidget {
@@ -58,7 +59,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: [
-                Text('ini satu'),
+                ManualPage(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -95,48 +96,52 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
       backgroundColor: cBlackColor,
       body: ListView(children: [
         Container(
-          margin: EdgeInsets.all(defaultMargin),
+          margin: EdgeInsets.symmetric(vertical: defaultMargin),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Row(
-                    children: [
-                      Container(
-                        width: smallLogo,
-                        height: smallLogo,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/logo.png'),
-                                fit: BoxFit.cover)),
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(
-                        'AQUALED',
-                        style: WhiteFont.copyWith(
-                            fontSize: 22,
-                            fontWeight: bold,
-                            letterSpacing: 0.35),
-                      ),
-                    ],
-                  )),
-                  Container(
-                    width: 17,
-                    height: 17,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/setting.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Container(
+                          width: smallLogo,
+                          height: smallLogo,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/logo.png'),
+                                  fit: BoxFit.cover)),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                          'AQUALED',
+                          style: WhiteFont.copyWith(
+                              fontSize: 22,
+                              fontWeight: bold,
+                              letterSpacing: 0.35),
+                        ),
+                      ],
+                    )),
+                    Container(
+                      width: 17,
+                      height: 17,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/setting.png'),
+                              fit: BoxFit.cover)),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 32,
               ),
               Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
                 height: 76,
                 decoration: BoxDecoration(
                     gradient: secondaryGradient,
