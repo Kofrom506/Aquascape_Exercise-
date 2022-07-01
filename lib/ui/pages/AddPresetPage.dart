@@ -26,6 +26,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
 
   double sliderValue = 50;
 
+  List<ScheduleModel> schedules = [ScheduleModel()];
+
   var uuid = Uuid();
 
   String presetName = 'Name';
@@ -53,8 +55,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.time,
                     onDateTimeChanged: (value) => setState(() => isStartActive
-                        ? (preset.getSchedule()[index].startActive = value)
-                        : (preset.getSchedule()[index].endActive = value)),
+                        ? (schedules[index].startActive = value)
+                        : (schedules[index].endActive = value)),
                     initialDateTime: DateTime.now(),
                   ),
                 ),
@@ -217,7 +219,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
                                     setState(() {
-                                      preset.getSchedule().removeAt(index);
+                                      schedules.removeAt(index);
                                     });
                                   },
                                 ),
@@ -230,7 +232,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     icon: Icons.delete,
                                     onPressed: (context) {
                                       setState(() {
-                                        preset.getSchedule().removeAt(index);
+                                        schedules.removeAt(index);
                                       });
                                     },
                                     borderRadius:
@@ -254,9 +256,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                           onTap: () => iosDatePicker(
                                               context, index, true),
                                           child: Text(
-                                            DateFormat('hh:mm a').format(preset
-                                                .getSchedule()[index]
-                                                .startActive),
+                                            DateFormat('hh:mm a').format(
+                                                schedules[index].startActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -269,9 +270,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                           onTap: () => iosDatePicker(
                                               context, index, false),
                                           child: Text(
-                                            DateFormat('hh:mm a').format(preset
-                                                .getSchedule()[index]
-                                                .endActive),
+                                            DateFormat('hh:mm a').format(
+                                                schedules[index].endActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -300,14 +300,26 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                   SizedBox(
                                     height: 9,
                                   ),
-                                  Slider(
-                                      value: sliderValue,
-                                      activeColor: cDarkOrange,
-                                      max: 100,
-                                      divisions: 100,
-                                      onChanged: (value) => setState(() =>
-                                          this.sliderValue =
-                                              value.roundToDouble())),
+                                  SliderTheme(
+                                    data: SliderThemeData(
+                                        trackHeight: 55.13,
+                                        inactiveTrackColor: cBlackColor,
+                                        activeTickMarkColor: cWhiteColor,
+                                        inactiveTickMarkColor: cWhiteColor,
+                                        activeTrackColor: cLightOrange,
+                                        thumbShape:
+                                            SliderComponentShape.noThumb,
+                                        tickMarkShape: RoundSliderTickMarkShape(
+                                            tickMarkRadius: 2)),
+                                    child: Slider(
+                                        value: schedules[index].startIntensity,
+                                        min: 0,
+                                        max: 100,
+                                        divisions: 5,
+                                        onChanged: (value) => setState(() =>
+                                            schedules[index].startIntensity =
+                                                value)),
+                                  ),
                                 ],
                               ),
                             ),
@@ -322,7 +334,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           endIndent: 27,
                         ),
                         padding: const EdgeInsets.all(8),
-                        itemCount: preset.getSchedule().length,
+                        itemCount: schedules.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                       ),
@@ -346,7 +358,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              preset.getSchedule().add(ScheduleModel());
+                              schedules.add(ScheduleModel());
                             });
                           },
                         ),
