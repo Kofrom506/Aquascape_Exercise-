@@ -8,4 +8,8 @@ class PresetModel {
   PresetModel(
       {this.id = '', this.presetName = 'Name', List<ScheduleModel>? schedules})
       : schedules = schedules ?? [ScheduleModel()];
+
+  List<ScheduleModel> getSchedule() {
+    return schedules!;
+  }
 }

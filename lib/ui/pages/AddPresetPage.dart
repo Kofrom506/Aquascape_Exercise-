@@ -53,8 +53,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.time,
                     onDateTimeChanged: (value) => setState(() => isStartActive
-                        ? (preset.schedules![index].startActive = value)
-                        : (preset.schedules![index].endActive = value)),
+                        ? (preset.getSchedule()[index].startActive = value)
+                        : (preset.getSchedule()[index].endActive = value)),
                     initialDateTime: DateTime.now(),
                   ),
                 ),
@@ -217,7 +217,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
                                     setState(() {
-                                      preset.schedules!.removeAt(index);
+                                      preset.getSchedule().removeAt(index);
                                     });
                                   },
                                 ),
@@ -230,7 +230,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     icon: Icons.delete,
                                     onPressed: (context) {
                                       setState(() {
-                                        preset.schedules!.removeAt(index);
+                                        preset.getSchedule().removeAt(index);
                                       });
                                     },
                                     borderRadius:
@@ -255,7 +255,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                               context, index, true),
                                           child: Text(
                                             DateFormat('hh:mm a').format(preset
-                                                .schedules![index].startActive),
+                                                .getSchedule()[index]
+                                                .startActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -269,7 +270,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                               context, index, false),
                                           child: Text(
                                             DateFormat('hh:mm a').format(preset
-                                                .schedules![index].endActive),
+                                                .getSchedule()[index]
+                                                .endActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -320,7 +322,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           endIndent: 27,
                         ),
                         padding: const EdgeInsets.all(8),
-                        itemCount: preset.schedules!.length,
+                        itemCount: preset.getSchedule().length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                       ),
@@ -344,7 +346,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              preset.schedules!.add(ScheduleModel());
+                              preset.getSchedule().add(ScheduleModel());
                             });
                           },
                         ),
