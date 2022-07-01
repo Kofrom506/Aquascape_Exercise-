@@ -297,25 +297,15 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                   SizedBox(
                                     height: 9,
                                   ),
-                                  SliderTheme(
-                                    data: SliderThemeData(
-                                        trackHeight: 55.13,
-                                        inactiveTrackColor: cBlackColor,
-                                        activeTickMarkColor: cWhiteColor,
-                                        inactiveTickMarkColor: cWhiteColor,
-                                        activeTrackColor: cLightOrange,
-                                        thumbShape:
-                                            SliderComponentShape.noThumb,
-                                        tickMarkShape: RoundSliderTickMarkShape(
-                                            tickMarkRadius: 2)),
-                                    child: Slider(
-                                        value: presets[index].intensity,
-                                        min: 0,
-                                        max: 100,
-                                        divisions: 5,
-                                        onChanged: (value) => setState(() =>
-                                            presets[index].intensity = value)),
-                                  ),
+                                  Slider(
+                                      value: presets[index].intensity,
+                                      min: 0,
+                                      max: 100,
+                                      divisions: 100,
+                                      activeColor: cDarkOrange,
+                                      onChanged: (value) => setState(() =>
+                                          presets[index].intensity =
+                                              value.roundToDouble())),
                                 ],
                               ),
                             ),
