@@ -38,8 +38,8 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
               InkWell(
                 child: Container(
                   child:
-                  Image.asset("assets/symbol/plus.png",fit: BoxFit.contain,
-                      height: 17.5),
+
+                      Icon(Icons.add_circle,color: Colors.white,)
                 ),
                 onTap: () {
                   setState(() {

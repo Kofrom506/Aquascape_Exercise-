@@ -1,4 +1,5 @@
 import 'package:aquascape_exercise/shared/theme.dart';
+import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
 
@@ -55,7 +56,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: [
-                Text('ini satu'),
+                ManualPage(),
                 AddPresetWidget(),
                 // Column(
                 //   crossAxisAlignment: CrossAxisAlignment.start,
