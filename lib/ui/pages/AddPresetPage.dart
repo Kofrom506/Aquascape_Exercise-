@@ -1,4 +1,5 @@
 import 'package:aquascape_exercise/model/preset_model.dart';
+import 'package:aquascape_exercise/model/schedule_model.dart';
 import 'package:aquascape_exercise/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
@@ -18,12 +19,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
 
   var uuid = Uuid();
 
-  List<ScheduleModel> presets = <ScheduleModel>[
-    ScheduleModel(
-      'initpreset',
-      scheduleId: 'initsched',
-    )
-  ];
+  List<ScheduleModel> presets = <ScheduleModel>[ScheduleModel()];
 
   String presetName = 'Name';
 
@@ -35,7 +31,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
       setState(() {
         presetName = presetNameController.text;
         for (ScheduleModel schedule in presets) {
-          schedule.presetName = presetName;
+          presetName = presetName;
         }
       });
     });
@@ -211,7 +207,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
                           return Slidable(
-                            key: Key(presets[index].scheduleId),
+                            key: Key(uuid.v4()),
                             endActionPane: ActionPane(
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
@@ -288,7 +284,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                             fontSize: 16, fontWeight: bold),
                                       ),
                                       Text(
-                                        '${presets[index].intensity}%',
+                                        '${presets[index].startIntensity}%',
                                         style: WhiteFont.copyWith(
                                             fontSize: 12, fontWeight: medium),
                                       ),
@@ -298,13 +294,13 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     height: 9,
                                   ),
                                   Slider(
-                                      value: presets[index].intensity,
+                                      value: presets[index].startIntensity,
                                       min: 0,
                                       max: 100,
                                       divisions: 100,
                                       activeColor: cDarkOrange,
                                       onChanged: (value) => setState(() =>
-                                          presets[index].intensity =
+                                          presets[index].startIntensity =
                                               value.roundToDouble())),
                                 ],
                               ),
@@ -348,8 +344,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              presets.add(ScheduleModel('initpreset',
-                                  scheduleId: uuid.v1()));
+                              presets.add(ScheduleModel());
                             });
                           },
                         ),
