@@ -207,7 +207,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
                           return Slidable(
-                            key: Key(uuid.v4()),
+                            key: Key(presets[index].id),
                             endActionPane: ActionPane(
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
@@ -344,7 +344,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              presets.add(ScheduleModel());
+                              presets.add(ScheduleModel(id: uuid.v1()));
                             });
                           },
                         ),
