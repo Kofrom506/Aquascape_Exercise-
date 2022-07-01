@@ -1,17 +1,11 @@
+import 'package:aquascape_exercise/model/schedule_model.dart';
+
 class PresetModel {
-  final String presetId;
+  String id;
   String presetName;
+  List<ScheduleModel>? schedules;
 
-  PresetModel({required this.presetId, this.presetName = 'Name'});
-}
-
-class ScheduleModel extends PresetModel {
-  final String scheduleId;
-  DateTime startActive = DateTime.now();
-  DateTime endActive = DateTime.now();
-  double intensity;
-
-  ScheduleModel(String presetId,
-      {required this.scheduleId, this.intensity = 50})
-      : super(presetId: presetId);
+  PresetModel(
+      {this.id = '', this.presetName = 'Name', List<ScheduleModel>? schedules})
+      : schedules = schedules ?? [ScheduleModel()];
 }
