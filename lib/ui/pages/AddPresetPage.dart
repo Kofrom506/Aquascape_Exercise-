@@ -26,10 +26,6 @@ class _AddPresetPageState extends State<AddPresetPage> {
 
   double sliderValue = 50;
 
-  List<ScheduleModel> schedules = [ScheduleModel()];
-
-  var uuid = Uuid();
-
   String presetName = 'Name';
 
 //BELUM ASSIGN PRESET NAME KE PRESET MODEL
@@ -55,8 +51,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.time,
                     onDateTimeChanged: (value) => setState(() => isStartActive
-                        ? (schedules[index].startActive = value)
-                        : (schedules[index].endActive = value)),
+                        ? (preset.schedules![index].startActive = value)
+                        : (preset.schedules![index].endActive = value)),
                     initialDateTime: DateTime.now(),
                   ),
                 ),
@@ -214,12 +210,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
                           return Slidable(
-                            key: Key(uuid.v4()),
+                            key: Key(index.toString()),
                             endActionPane: ActionPane(
                                 dismissible: DismissiblePane(
                                   onDismissed: () {
                                     setState(() {
-                                      schedules.removeAt(index);
+                                      preset.schedules!.removeAt(index);
                                     });
                                   },
                                 ),
@@ -232,7 +228,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     icon: Icons.delete,
                                     onPressed: (context) {
                                       setState(() {
-                                        schedules.removeAt(index);
+                                        preset.schedules!.removeAt(index);
                                       });
                                     },
                                     borderRadius:
@@ -256,8 +252,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                           onTap: () => iosDatePicker(
                                               context, index, true),
                                           child: Text(
-                                            DateFormat('hh:mm a').format(
-                                                schedules[index].startActive),
+                                            DateFormat('hh:mm a').format(preset
+                                                .schedules![index].startActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -270,8 +266,8 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                           onTap: () => iosDatePicker(
                                               context, index, false),
                                           child: Text(
-                                            DateFormat('hh:mm a').format(
-                                                schedules[index].endActive),
+                                            DateFormat('hh:mm a').format(preset
+                                                .schedules![index].endActive),
                                             style: WhiteFont.copyWith(
                                                 fontSize: 19,
                                                 fontWeight: medium),
@@ -291,7 +287,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                             fontSize: 14, fontWeight: bold),
                                       ),
                                       Text(
-                                        '${sliderValue}%',
+                                        '${preset.schedules![index].startIntensity}%',
                                         style: WhiteFont.copyWith(
                                             fontSize: 12, fontWeight: medium),
                                       ),
@@ -300,26 +296,17 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                   SizedBox(
                                     height: 9,
                                   ),
-                                  SliderTheme(
-                                    data: SliderThemeData(
-                                        trackHeight: 55.13,
-                                        inactiveTrackColor: cBlackColor,
-                                        activeTickMarkColor: cWhiteColor,
-                                        inactiveTickMarkColor: cWhiteColor,
-                                        activeTrackColor: cLightOrange,
-                                        thumbShape:
-                                            SliderComponentShape.noThumb,
-                                        tickMarkShape: RoundSliderTickMarkShape(
-                                            tickMarkRadius: 2)),
-                                    child: Slider(
-                                        value: schedules[index].startIntensity,
-                                        min: 0,
-                                        max: 100,
-                                        divisions: 5,
-                                        onChanged: (value) => setState(() =>
-                                            schedules[index].startIntensity =
-                                                value)),
-                                  ),
+                                  Slider(
+                                      value: preset
+                                          .schedules![index].startIntensity,
+                                      min: 0,
+                                      max: 100,
+                                      divisions: 100,
+                                      activeColor: cDarkOrange,
+                                      onChanged: (value) => setState(() =>
+                                          preset.schedules![index]
+                                                  .startIntensity =
+                                              value.roundToDouble())),
                                 ],
                               ),
                             ),
@@ -334,7 +321,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           endIndent: 27,
                         ),
                         padding: const EdgeInsets.all(8),
-                        itemCount: schedules.length,
+                        itemCount: preset.schedules!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                       ),
@@ -358,7 +345,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                           ),
                           onTap: () {
                             setState(() {
-                              schedules.add(ScheduleModel());
+                              preset.schedules!.add(ScheduleModel());
                             });
                           },
                         ),
