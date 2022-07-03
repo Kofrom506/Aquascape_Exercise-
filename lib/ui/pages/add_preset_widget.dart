@@ -7,18 +7,19 @@ import 'package:aquascape_exercise/ui/widgets/preset_view.dart';
 
 class AddPresetWidget extends StatefulWidget {
   @override
-  State<AddPresetWidget> createState() => _MyAddPresetWidgetState ();
+  State<AddPresetWidget> createState() => _MyAddPresetWidgetState();
 }
+
 class _MyAddPresetWidgetState extends State<AddPresetWidget> {
   List<Widget> box = [];
-  List<PresetModel> preset=[];
-  int counter=1;
+  List<PresetModel> preset = [];
+  int counter = 1;
 
   // PresetModel presetModel=PresetModel(presetId: "presetId");
   // int ganjil = 1;
   // int genap = 2;
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
         Container(
@@ -37,47 +38,49 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
               Padding(padding: EdgeInsets.only(left: 10, top: 30)),
               InkWell(
                 child: Container(
-                  child:
-
-                      Icon(Icons.add_circle,color: Colors.white,)
-                ),
+                    child: Icon(
+                  Icons.add_circle,
+                  color: Colors.white,
+                )),
                 onTap: () {
                   setState(() {
                     box.clear();
                     print("Clicked");
                     print(counter);
-                    preset.add(PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString()));
+                    preset.add(
+                        PresetModel(presetName: "Preset" + counter.toString()));
 
-                    for(int i=1;i<=counter;i++) {
+                    for (int i = 1; i <= counter; i++) {
                       if (i % 2 == 0) {
                         box.removeLast();
-                        box.add(PresetView(presetModel1: preset[i - 1],
+                        box.add(PresetView(
+                            presetModel1: preset[i - 1],
                             presetModel2: preset[i]));
                         // i+=1;
                       } else {
                         box.add(PresetView1(presetModel: preset[i]));
                       }
                     }
-                    counter+=1;
+                    counter += 1;
 //statements
                   }
 
-                    // if(counter%2==0){
-                    //
-                    //   PresetModel presetModel1=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
-                    //   PresetModel presetModel2=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
-                    //   box.add(
-                    //     PresetView(presetModel: presetModel),
-                    //   );
-                    //   counter+=2;
-                    // }else{
-                    //   box.add(
-                    //     PresetView1(presetModel: presetModel),
-                    //   );
-                    //   counter+=1;
-                    // }
+                      // if(counter%2==0){
+                      //
+                      //   PresetModel presetModel1=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
+                      //   PresetModel presetModel2=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
+                      //   box.add(
+                      //     PresetView(presetModel: presetModel),
+                      //   );
+                      //   counter+=2;
+                      // }else{
+                      //   box.add(
+                      //     PresetView1(presetModel: presetModel),
+                      //   );
+                      //   counter+=1;
+                      // }
 
-                  );
+                      );
                 },
               ),
             ],
@@ -85,16 +88,10 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
         ),
         Container(
           // color: Colors.red,
-          padding: EdgeInsets.only(left: 25, right: 25),
+          padding: EdgeInsets.only(left: 25, right: 25, bottom: 100),
           child: Column(children: box),
         ),
-
       ],
-
-
-
     );
   }
 }
-
-
