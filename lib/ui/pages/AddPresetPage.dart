@@ -6,7 +6,6 @@ import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:uuid/uuid.dart';
 
 class AddPresetPage extends StatefulWidget {
   @override
@@ -23,8 +22,6 @@ class _AddPresetPageState extends State<AddPresetPage> {
 
   //Assign preset schedule list into new list to make it a state object
   // List<ScheduleModel>? schedules = preset.schedules;
-
-  double sliderValue = 50;
 
   String presetName = 'Name';
 
@@ -306,6 +303,20 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                       onChanged: (value) => setState(() =>
                                           preset.schedules![index]
                                                   .startIntensity =
+                                              value.roundToDouble())),
+                                  SizedBox(
+                                    height: 9,
+                                  ),
+                                  Slider(
+                                      value:
+                                          preset.schedules![index].endIntensity,
+                                      min: 0,
+                                      max: 100,
+                                      divisions: 100,
+                                      activeColor: cDarkOrange,
+                                      onChanged: (value) => setState(() =>
+                                          preset.schedules![index]
+                                                  .endIntensity =
                                               value.roundToDouble())),
                                 ],
                               ),
