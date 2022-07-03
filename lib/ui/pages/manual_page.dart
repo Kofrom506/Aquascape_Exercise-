@@ -41,7 +41,7 @@ class ManualPage extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Icon(Icons.add)
+                      Image.asset('assets/Lamp.png'),
                       // Image.asset('clock.png'),
                     ],
                   ),
@@ -198,7 +198,7 @@ class _SSlideState extends State<SSlide> {
                       style:
                           WhiteFont.copyWith(fontSize: 22, fontWeight: bold))),
               Text(
-                '$_currentSliderValue%',
+                '${_currentSliderValue.round()}%',
                 style: WhiteFont.copyWith(fontWeight: medium),
               ),
             ],
@@ -219,16 +219,5 @@ class _SSlideState extends State<SSlide> {
         ),
       ],
     );
-    // Slider(
-    //   value: _currentSliderValue,
-    //   // thumbColor: cDarkOrange,
-    //   activeColor: cDarkOrange,
-    //   max: 100,
-    //   divisions: 100,
-    //   label: _currentSliderValue.round().toString(),
-    //   onChanged: (double value) {
-    //     setState(() => _currentSliderValue = value);
-    //   },
-    // );
   }
 }

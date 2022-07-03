@@ -8,6 +8,7 @@ class AutoPage extends StatefulWidget {
   @override
   _AutoPageState createState() => _AutoPageState();
 }
+
 class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   TabController? _tabController;
   //buat state nantinya
@@ -32,6 +33,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(defaultRadius)),
       );
     }
+
     Widget tabBar() {
       return Column(
         children: [
@@ -40,7 +42,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
               controller: _tabController,
               labelColor: cWhiteColor,
               labelPadding:
-              const EdgeInsets.only(bottom: 10, right: 20, left: 20),
+                  const EdgeInsets.only(bottom: 10, right: 20, left: 20),
               unselectedLabelColor: cManualGreyColor,
               isScrollable: true,
               indicator: CircleTabIndicator(color: cWhiteColor, radius: 3.5),
@@ -58,43 +60,6 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
               children: [
                 ManualPage(),
                 AddPresetWidget(),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Text(
-                //       'Add Preset',
-                //       style: WhiteFont.copyWith(fontSize: 22, fontWeight: bold),
-                //     ),
-                //     Container(
-                //     // margin: EdgeInsets.only(top: 20),
-                //     height: (scheduleCount == 1 && scheduleCount > 0)
-                //     ? 290
-                //         : 470 + 185 * (scheduleCount - 2),
-                //     decoration: BoxDecoration(
-                //     color: cGreyColor,
-                //     borderRadius: BorderRadius.circular(defaultRadius)),
-                //     child: AddPresetWidget(counter: scheduleCount),
-                //     ),
-                //
-                //
-                //
-                //     Container(
-                //       margin: EdgeInsets.only(top: 20),
-                //       height: 47,
-                //       width: double.infinity,
-                //       decoration: BoxDecoration(
-                //           gradient: secondaryGradient,
-                //           borderRadius: BorderRadius.circular(defaultRadius)),
-                //       child: TextButton(
-                //           onPressed: () {},
-                //           child: Text(
-                //             'Save',
-                //             style: WhiteFont.copyWith(
-                //                 fontSize: 16, fontWeight: semiBold),
-                //           )),
-                //     )
-                //   ],
-                // ),
               ],
             ),
           ),
@@ -106,48 +71,52 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
       backgroundColor: cBlackColor,
       body: ListView(children: [
         Container(
-          margin: EdgeInsets.all(defaultMargin),
+          margin: EdgeInsets.symmetric(vertical: defaultMargin),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Row(
-                        children: [
-                          Container(
-                            width: smallLogo,
-                            height: smallLogo,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage('assets/logo.png'),
-                                    fit: BoxFit.cover)),
-                          ),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            'AQUALED',
-                            style: WhiteFont.copyWith(
-                                fontSize: 22,
-                                fontWeight: bold,
-                                letterSpacing: 0.35),
-                          ),
-                        ],
-                      )),
-                  Container(
-                    width: 17,
-                    height: 17,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/setting.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Container(
+                          width: smallLogo,
+                          height: smallLogo,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/logo.png'),
+                                  fit: BoxFit.cover)),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                          'AQUALED',
+                          style: WhiteFont.copyWith(
+                              fontSize: 22,
+                              fontWeight: bold,
+                              letterSpacing: 0.35),
+                        ),
+                      ],
+                    )),
+                    Container(
+                      width: 17,
+                      height: 17,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/setting.png'),
+                              fit: BoxFit.cover)),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 32,
               ),
               Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
                 height: 76,
                 decoration: BoxDecoration(
                     gradient: secondaryGradient,

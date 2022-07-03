@@ -84,7 +84,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                         height: smallLogo,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage('logo.png'),
+                                image: AssetImage('assets/logo.png'),
                                 fit: BoxFit.cover)),
                       ),
                       SizedBox(
@@ -104,7 +104,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                     height: 17,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('setting.png'),
+                            image: AssetImage('assets/setting.png'),
                             fit: BoxFit.cover)),
                   ),
                 ],
@@ -142,7 +142,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                             height: 22,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                              image: AssetImage('pencil.png'),
+                              image: AssetImage('assets/pencil.png'),
                             )),
                           ),
                         ),
@@ -190,7 +190,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                               height: 22,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                image: AssetImage('clock.png'),
+                                image: AssetImage('assets/clock.png'),
                               )),
                             ),
                           ),
@@ -238,12 +238,13 @@ class _AddPresetPageState extends State<AddPresetPage> {
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         'from',
                                         style: WhiteFont.copyWith(fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
                                       ),
                                       GestureDetector(
                                           onTap: () => iosDatePicker(
@@ -255,9 +256,52 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                                 fontSize: 19,
                                                 fontWeight: medium),
                                           )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 28,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Intensity',
+                                        style: WhiteFont.copyWith(
+                                            fontSize: 14, fontWeight: bold),
+                                      ),
+                                      Text(
+                                        '${preset.schedules![index].startIntensity.round()}%',
+                                        style: WhiteFont.copyWith(
+                                            fontSize: 12, fontWeight: medium),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 9,
+                                  ),
+                                  Slider(
+                                      value: preset
+                                          .schedules![index].startIntensity,
+                                      min: 0,
+                                      max: 100,
+                                      divisions: 100,
+                                      activeColor: cLightOrange,
+                                      onChanged: (value) => setState(() =>
+                                          preset.schedules![index]
+                                                  .startIntensity =
+                                              value.roundToDouble())),
+                                  SizedBox(
+                                    height: 9,
+                                  ),
+                                  Row(
+                                    children: [
                                       Text(
                                         'to',
                                         style: WhiteFont.copyWith(fontSize: 12),
+                                      ),
+                                      SizedBox(
+                                        width: 15,
                                       ),
                                       GestureDetector(
                                           onTap: () => iosDatePicker(
@@ -279,12 +323,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Start Intensity',
+                                        'Intensity',
                                         style: WhiteFont.copyWith(
                                             fontSize: 14, fontWeight: bold),
                                       ),
                                       Text(
-                                        '${preset.schedules![index].startIntensity}%',
+                                        '${preset.schedules![index].endIntensity.round()}%',
                                         style: WhiteFont.copyWith(
                                             fontSize: 12, fontWeight: medium),
                                       ),
@@ -294,26 +338,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                     height: 9,
                                   ),
                                   Slider(
-                                      value: preset
-                                          .schedules![index].startIntensity,
-                                      min: 0,
-                                      max: 100,
-                                      divisions: 100,
-                                      activeColor: cDarkOrange,
-                                      onChanged: (value) => setState(() =>
-                                          preset.schedules![index]
-                                                  .startIntensity =
-                                              value.roundToDouble())),
-                                  SizedBox(
-                                    height: 9,
-                                  ),
-                                  Slider(
                                       value:
                                           preset.schedules![index].endIntensity,
                                       min: 0,
                                       max: 100,
                                       divisions: 100,
-                                      activeColor: cDarkOrange,
+                                      activeColor: cLightOrange,
                                       onChanged: (value) => setState(() =>
                                           preset.schedules![index]
                                                   .endIntensity =
