@@ -41,7 +41,8 @@ class ManualPage extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Image.asset('Lamp.png'),
+                      Icon(Icons.add)
+                      // Image.asset('clock.png'),
                     ],
                   ),
                 ),
@@ -125,7 +126,7 @@ class ManualPage extends StatelessWidget {
                                     top: 0,
                                     left: 0,
                                     child: Image.asset(
-                                      'Power.png',
+                                      'assets/Power.png',
                                     )),
                               ]))),
                     ])),
