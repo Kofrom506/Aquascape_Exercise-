@@ -88,7 +88,7 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
         ),
         Container(
           // color: Colors.red,
-          padding: EdgeInsets.only(left: 25, right: 25),
+          padding: EdgeInsets.only(left: 25, right: 25, bottom: 100),
           child: Column(children: box),
         ),
       ],
