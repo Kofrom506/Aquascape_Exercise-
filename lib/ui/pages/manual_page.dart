@@ -14,53 +14,6 @@ class ManualPage extends StatelessWidget {
           margin: EdgeInsets.all(defaultMargin),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: Row(
-                    children: [
-                      Container(
-                        width: smallLogo,
-                        height: smallLogo,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/logo.png'),
-                                fit: BoxFit.cover)),
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(
-                        'AQUALED',
-                        style: WhiteFont.copyWith(
-                            fontSize: 22,
-                            fontWeight: bold,
-                            letterSpacing: 0.35),
-                      ),
-                    ],
-                  )),
-                  Container(
-                    width: 17,
-                    height: 17,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/setting.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              Container(
-                height: 76,
-                decoration: BoxDecoration(
-                    gradient: secondaryGradient,
-                    borderRadius: BorderRadius.circular(defaultRadius)),
-              ),
-              SizedBox(
-                height: 50,
-              ),
               Lighting(),
               SizedBox(
                 height: 50,
@@ -79,12 +32,15 @@ class Lighting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
       decoration: BoxDecoration(),
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Container(
+            // margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -112,7 +68,8 @@ class Lighting extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Image.asset('Lamp.png'),
+                      Image.asset('assets/Lamp.png'),
+                      // Image.asset('clock.png'),
                     ],
                   ),
                 ),
@@ -155,6 +112,8 @@ class Lighting extends StatelessWidget {
           ),
           SizedBox(height: 22),
           Container(
+            // margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -252,25 +211,56 @@ class Lighting extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 40,
+          ),
+          SSlide(),
         ],
       ),
     );
   }
 }
 
-class SSlide extends StatelessWidget {
+class SSlide extends StatefulWidget {
+  @override
+  _SSlideState createState() => _SSlideState();
+}
+
+class _SSlideState extends State<SSlide> {
   double _currentSliderValue = 20;
 
   @override
   Widget build(BuildContext context) {
-    return Slider(
-      value: _currentSliderValue,
-      thumbColor: cDarkOrange,
-      activeColor: cDarkOrange,
-      max: 100,
-      divisions: 100,
-      label: _currentSliderValue.round().toString(),
-      onChanged: (double value) {},
+    return Column(
+      children: [
+        Container(
+          child: Row(
+            children: [
+              Expanded(
+                  child: Text('Intensity',
+                      style:
+                          WhiteFont.copyWith(fontSize: 22, fontWeight: bold))),
+              Text(
+                '${_currentSliderValue.round()}%',
+                style: WhiteFont.copyWith(fontWeight: medium),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 25,
+        ),
+        Slider(
+          value: _currentSliderValue,
+          activeColor: cDarkOrange,
+          max: 100,
+          divisions: 100,
+          label: _currentSliderValue.round().toString(),
+          onChanged: (double value) {
+            setState(() => _currentSliderValue = value.roundToDouble());
+          },
+        ),
+      ],
     );
   }
 }

@@ -1,24 +1,40 @@
 import 'package:aquascape_exercise/shared/theme.dart';
+import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:flutter/material.dart';
+import 'package:aquascape_exercise/ui/pages/about_page.dart';
+import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
 
 class AutoPage extends StatefulWidget {
   const AutoPage({Key? key}) : super(key: key);
-
   @override
   _AutoPageState createState() => _AutoPageState();
 }
 
 class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   TabController? _tabController;
-
+  //buat state nantinya
+  int scheduleCount = 1;
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget addSchedule() {
+      return Container(
+        margin: EdgeInsets.only(top: 20),
+        height: (scheduleCount == 1 && scheduleCount > 0)
+            ? 290
+            : 470 + 185 * (scheduleCount - 2),
+        decoration: BoxDecoration(
+            color: cGreyColor,
+            borderRadius: BorderRadius.circular(defaultRadius)),
+      );
+    }
+
     Widget tabBar() {
       return Column(
         children: [
@@ -36,10 +52,16 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
           ),
           Container(
             width: double.maxFinite,
-            height: 300,
+            height: (scheduleCount == 1
+                ? 447
+                : 150 + 470 + 185 * (scheduleCount - 2)),
+            padding: EdgeInsets.only(top: 30),
             child: TabBarView(
               controller: _tabController,
-              children: [Text('ini satu'), Text('ini dua')],
+              children: [
+                ManualPage(),
+                AddPresetWidget(),
+              ],
             ),
           ),
         ],
@@ -48,62 +70,75 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
 
     return Scaffold(
       backgroundColor: cBlackColor,
-      body: Container(
-        margin: EdgeInsets.all(defaultMargin),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Container(
-                        width: smallLogo,
-                        height: smallLogo,
+      body: ListView(children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: defaultMargin),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Container(
+                          width: smallLogo,
+                          height: smallLogo,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/logo.png'),
+                                  fit: BoxFit.cover)),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                          'AQUALED',
+                          style: WhiteFont.copyWith(
+                              fontSize: 22,
+                              fontWeight: bold,
+                              letterSpacing: 0.35),
+                        ),
+                      ],
+                    )),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AboutPage()));
+                      },
+                      child: Container(
+                        width: 17,
+                        height: 17,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage('assets/logo.png'),
+                                image: AssetImage('assets/setting.png'),
                                 fit: BoxFit.cover)),
                       ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(
-                        'AQUALED',
-                        style: WhiteFont.copyWith(
-                            fontSize: 22,
-                            fontWeight: bold,
-                            letterSpacing: 0.35),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                  width: 17,
-                  height: 17,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/setting.png'),
-                          fit: BoxFit.cover)),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 32,
-            ),
-            Container(
-              height: 76,
-              decoration: BoxDecoration(
-                  gradient: secondaryGradient,
-                  borderRadius: BorderRadius.circular(defaultRadius)),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            tabBar(),
-          ],
+              ),
+              SizedBox(
+                height: 32,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                height: 76,
+                decoration: BoxDecoration(
+                    gradient: secondaryGradient,
+                    borderRadius: BorderRadius.circular(defaultRadius)),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              tabBar(),
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
