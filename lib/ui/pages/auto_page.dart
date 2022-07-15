@@ -1,6 +1,7 @@
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:flutter/material.dart';
+import 'package:aquascape_exercise/ui/pages/about_page.dart';
 import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
 
 class AutoPage extends StatefulWidget {
@@ -101,13 +102,21 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
                         ),
                       ],
                     )),
-                    Container(
-                      width: 17,
-                      height: 17,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/setting.png'),
-                              fit: BoxFit.cover)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AboutPage()));
+                      },
+                      child: Container(
+                        width: 17,
+                        height: 17,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/setting.png'),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ],
                 ),
