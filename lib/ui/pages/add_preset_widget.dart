@@ -15,9 +15,6 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
   List<PresetModel> preset = [];
   int counter = 1;
 
-  // PresetModel presetModel=PresetModel(presetId: "presetId");
-  // int ganjil = 1;
-  // int genap = 2;
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -62,25 +59,7 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                       }
                     }
                     counter += 1;
-//statements
-                  }
-
-                      // if(counter%2==0){
-                      //
-                      //   PresetModel presetModel1=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
-                      //   PresetModel presetModel2=PresetModel(presetId: "presetId",presetName: "Preset"+counter.toString());
-                      //   box.add(
-                      //     PresetView(presetModel: presetModel),
-                      //   );
-                      //   counter+=2;
-                      // }else{
-                      //   box.add(
-                      //     PresetView1(presetModel: presetModel),
-                      //   );
-                      //   counter+=1;
-                      // }
-
-                      );
+                  });
                 },
               ),
             ],
