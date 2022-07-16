@@ -21,7 +21,6 @@ LinearGradient secondaryGradient = LinearGradient(
 
 LinearGradient pinkGradient = LinearGradient(
   colors: [Color(0xffED1CFF), Color(0xffFA7171)],
-  begin: Alignment(-2, -2),
   end: Alignment.bottomRight,
 );
 
