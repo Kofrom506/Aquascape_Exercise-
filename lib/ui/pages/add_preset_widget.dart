@@ -29,8 +29,8 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
+    return Column(
+      children: [
         Container(
           padding: EdgeInsets.only(
             left: 30,
@@ -91,10 +91,18 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
             ],
           ),
         ),
-        Container(
-          // color: Colors.red,
-          padding: EdgeInsets.only(left: 25, right: 25, bottom: 100),
-          child: Column(children: box),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: ListView(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 25, right: 25, bottom: 100),
+                child: Column(children: box),
+              ),
+            ],
+          ),
         ),
       ],
     );
