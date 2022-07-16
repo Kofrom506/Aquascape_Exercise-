@@ -50,8 +50,8 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                     preset.add(
                         PresetModel(presetName: "Preset" + counter.toString()));
 
-                    for (int i = 1; i <= counter; i++) {
-                      if (i % 2 == 0) {
+                    for (int i = 0; i < counter; i++) {
+                      if ((i + 1) % 2 == 0) {
                         box.removeLast();
                         box.add(PresetView(
                             presetModel1: preset[i - 1],
