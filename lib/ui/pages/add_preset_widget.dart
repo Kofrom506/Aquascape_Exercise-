@@ -23,7 +23,6 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
 
   List<Widget> box = [];
   List<PresetModel> preset = [];
-  int counter = 1;
   int colorCounter = 0;
   List<LinearGradient> colorGradient;
 
@@ -56,12 +55,11 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                 onTap: () {
                   setState(() {
                     box.clear();
-                    print("Clicked");
-                    print(counter);
                     preset.add(PresetModel(
-                        presetName: "Preset " + counter.toString()));
+                        presetName:
+                            "Preset " + (preset.length + 1).toString()));
 
-                    for (int i = 0; i < counter; i++) {
+                    for (int i = 0; i < preset.length; i++) {
                       if (colorCounter == colorGradient.length) {
                         colorCounter = 0;
                       }
@@ -84,7 +82,6 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                         ));
                       }
                     }
-                    counter += 1;
                   });
                 },
               ),

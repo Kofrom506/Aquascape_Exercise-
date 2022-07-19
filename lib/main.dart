@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => AutoPage(),
+        '/AddPresetPage': (context) => AddPresetPage(),
       },
     );
   }
 }
-//dsujadiahdaiuhd

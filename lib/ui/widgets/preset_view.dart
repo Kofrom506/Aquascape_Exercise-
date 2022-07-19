@@ -13,8 +13,18 @@ class PresetView extends StatelessWidget {
   PresetModel presetModel2;
   LinearGradient leftGradient;
   LinearGradient rightGradient;
+  bool isSelectedLeft = false;
+  bool isSelectedRight = false;
   @override
   Widget build(BuildContext context) {
+    Color borderColor(bool isSelected) {
+      if (!isSelected) {
+        return Colors.transparent;
+      } else {
+        return cWhiteColor;
+      }
+    }
+
     return Row(
       children: [
         Expanded(
@@ -26,6 +36,10 @@ class PresetView extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: leftGradient,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: borderColor(isSelectedLeft),
+                  width: 2,
+                ),
               ),
               child: Container(
                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -41,16 +55,7 @@ class PresetView extends StatelessWidget {
             ),
             onTap: () {
               print(presetModel1.presetName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddPresetPage()),
-              );
-              BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10));
+              Navigator.pushNamed(context, '/AddPresetPage');
             },
           ),
         ),
@@ -63,6 +68,10 @@ class PresetView extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: rightGradient,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: borderColor(isSelectedRight),
+                  width: 2,
+                ),
               ),
               child: Container(
                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -78,16 +87,7 @@ class PresetView extends StatelessWidget {
             ),
             onTap: () {
               print(presetModel2.presetName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddPresetPage()),
-              );
-              BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10));
+              Navigator.pushNamed(context, '/AddPresetPage');
             },
           ),
         ),
@@ -101,8 +101,17 @@ class PresetView1 extends StatelessWidget {
   PresetView1({required this.presetModel, required this.leftGradient});
   PresetModel presetModel;
   LinearGradient leftGradient;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
+    Color borderColor() {
+      if (!isSelected) {
+        return Colors.transparent;
+      } else {
+        return cWhiteColor;
+      }
+    }
+
     return Row(
       children: [
         Expanded(
@@ -114,6 +123,10 @@ class PresetView1 extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: leftGradient,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: borderColor(),
+                  width: 2,
+                ),
               ),
               child: Container(
                 padding: EdgeInsets.only(left: 15, top: 10),
@@ -129,16 +142,7 @@ class PresetView1 extends StatelessWidget {
             ),
             onTap: () {
               print(presetModel.presetName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddPresetPage()),
-              );
-              BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10));
+              Navigator.pushNamed(context, '/AddPresetPage');
             },
           ),
         ),
