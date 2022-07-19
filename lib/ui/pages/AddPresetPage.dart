@@ -10,16 +10,21 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AddPresetPage extends StatefulWidget {
   @override
-  _AddPresetPageState createState() => _AddPresetPageState();
+  _AddPresetPageState createState() => _AddPresetPageState(presetId);
+  final String presetId;
+  AddPresetPage(this.presetId);
 }
 
 class _AddPresetPageState extends State<AddPresetPage> {
+  _AddPresetPageState(this.presetId);
+  String presetId;
+
   //preset name controller
   final TextEditingController presetNameController =
       TextEditingController(text: '');
 
   //Create preset instance
-  PresetModel preset = new PresetModel();
+  PresetModel preset = new PresetModel(id: 'zas');
 
   //Assign preset schedule list into new list to make it a state object
   // List<ScheduleModel>? schedules = preset.schedules;

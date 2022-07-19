@@ -1,9 +1,11 @@
 import 'dart:ui';
+import 'package:aquascape_exercise/cubit/select_preset_cubit.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:aquascape_exercise/ui/widgets/preset_view.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/model/preset_model.dart';
 import 'package:aquascape_exercise/ui/widgets/preset_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:aquascape_exercise/ui/widgets/preset_view.dart';
 
 class AddPresetWidget extends StatefulWidget {
@@ -55,7 +57,9 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                 onTap: () {
                   setState(() {
                     box.clear();
+                    //PRESETLENGTH + 1 WILL BE A PROBLEM IF 'DELETE PRESET' IMPLEMENTED
                     preset.add(PresetModel(
+                        id: (preset.length + 1).toString(),
                         presetName:
                             "Preset " + (preset.length + 1).toString()));
 
@@ -96,7 +100,11 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(left: 25, right: 25, bottom: 100),
-                child: Column(children: box),
+                child: BlocBuilder<SelectPresetCubit, String>(
+                  builder: (context, state) {
+                    return Column(children: box);
+                  },
+                ),
               ),
             ],
           ),

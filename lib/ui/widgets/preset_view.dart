@@ -1,7 +1,9 @@
+import 'package:aquascape_exercise/cubit/select_preset_cubit.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/model/preset_model.dart';
 import 'package:aquascape_exercise/ui/pages/AddPresetPage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PresetView extends StatelessWidget {
   PresetView(
@@ -17,6 +19,12 @@ class PresetView extends StatelessWidget {
   bool isSelectedRight = false;
   @override
   Widget build(BuildContext context) {
+    bool isSelectedLeft =
+        context.watch<SelectPresetCubit>().isSelected(presetModel1.id);
+    bool isSelectedRight =
+        context.watch<SelectPresetCubit>().isSelected(presetModel2.id);
+    ;
+
     Color borderColor(bool isSelected) {
       if (!isSelected) {
         return Colors.transparent;
@@ -38,7 +46,7 @@ class PresetView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: borderColor(isSelectedLeft),
-                  width: 2,
+                  width: 4,
                 ),
               ),
               child: Container(
@@ -57,6 +65,9 @@ class PresetView extends StatelessWidget {
               print(presetModel1.presetName);
               Navigator.pushNamed(context, '/AddPresetPage');
             },
+            onLongPress: () {
+              context.read<SelectPresetCubit>().selectPreset(presetModel1.id);
+            },
           ),
         ),
         Expanded(
@@ -70,7 +81,7 @@ class PresetView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: borderColor(isSelectedRight),
-                  width: 2,
+                  width: 4,
                 ),
               ),
               child: Container(
@@ -89,6 +100,9 @@ class PresetView extends StatelessWidget {
               print(presetModel2.presetName);
               Navigator.pushNamed(context, '/AddPresetPage');
             },
+            onLongPress: () {
+              context.read<SelectPresetCubit>().selectPreset(presetModel2.id);
+            },
           ),
         ),
       ],
@@ -101,9 +115,11 @@ class PresetView1 extends StatelessWidget {
   PresetView1({required this.presetModel, required this.leftGradient});
   PresetModel presetModel;
   LinearGradient leftGradient;
-  bool isSelected = false;
+
   @override
   Widget build(BuildContext context) {
+    bool isSelected =
+        context.watch<SelectPresetCubit>().isSelected(presetModel.id);
     Color borderColor() {
       if (!isSelected) {
         return Colors.transparent;
@@ -125,7 +141,7 @@ class PresetView1 extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: borderColor(),
-                  width: 2,
+                  width: 4,
                 ),
               ),
               child: Container(
@@ -143,6 +159,9 @@ class PresetView1 extends StatelessWidget {
             onTap: () {
               print(presetModel.presetName);
               Navigator.pushNamed(context, '/AddPresetPage');
+            },
+            onLongPress: () {
+              context.read<SelectPresetCubit>().selectPreset(presetModel.id);
             },
           ),
         ),

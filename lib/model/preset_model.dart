@@ -6,7 +6,9 @@ class PresetModel {
   List<ScheduleModel>? schedules;
 
   PresetModel(
-      {this.id = '', this.presetName = 'Name', List<ScheduleModel>? schedules})
+      {required this.id,
+      this.presetName = 'Name',
+      List<ScheduleModel>? schedules})
       : schedules = schedules ?? [ScheduleModel()];
 
   List<ScheduleModel> getSchedule() {
