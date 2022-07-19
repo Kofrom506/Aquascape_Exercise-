@@ -62,8 +62,10 @@ class PresetView extends StatelessWidget {
               ),
             ),
             onTap: () {
-              print(presetModel1.presetName);
-              Navigator.pushNamed(context, '/AddPresetPage');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddPresetPage(presetModel1)));
             },
             onLongPress: () {
               context.read<SelectPresetCubit>().selectPreset(presetModel1.id);
@@ -97,8 +99,10 @@ class PresetView extends StatelessWidget {
               ),
             ),
             onTap: () {
-              print(presetModel2.presetName);
-              Navigator.pushNamed(context, '/AddPresetPage');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddPresetPage(presetModel2)));
             },
             onLongPress: () {
               context.read<SelectPresetCubit>().selectPreset(presetModel2.id);
@@ -157,8 +161,10 @@ class PresetView1 extends StatelessWidget {
               ),
             ),
             onTap: () {
-              print(presetModel.presetName);
-              Navigator.pushNamed(context, '/AddPresetPage');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddPresetPage(presetModel)));
             },
             onLongPress: () {
               context.read<SelectPresetCubit>().selectPreset(presetModel.id);
