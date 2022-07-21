@@ -1,3 +1,4 @@
+import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
 import 'package:aquascape_exercise/model/preset_model.dart';
 import 'package:aquascape_exercise/model/schedule_model.dart';
 import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
@@ -5,6 +6,7 @@ import 'package:aquascape_exercise/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -23,10 +25,6 @@ class _AddPresetPageState extends State<AddPresetPage> {
   final TextEditingController presetNameController =
       TextEditingController(text: '');
 
-  //Assign preset schedule list into new list to make it a state object
-  // List<ScheduleModel>? schedules = preset.schedules;
-
-//BELUM ASSIGN PRESET NAME KE PRESET MODEL
   @override
   void initState() {
     String presetName = preset.presetName;
@@ -78,11 +76,35 @@ class _AddPresetPageState extends State<AddPresetPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  child: Text(
-                    'Edit Preset',
-                    style: WhiteFont.copyWith(fontSize: 22, fontWeight: bold),
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          'Edit Preset',
+                          style: WhiteFont.copyWith(
+                              fontSize: 22, fontWeight: bold),
+                        ),
+                      ),
+                    ),
+                    BlocBuilder<PresetListCubit, List<PresetModel>>(
+                      builder: (context, state) {
+                        return Container(
+                          child: IconButton(
+                            color: cWhiteColor,
+                            onPressed: () {
+                              context
+                                  .read<PresetListCubit>()
+                                  .deletePreset(this.preset);
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/', (route) => false);
+                            },
+                            icon: Icon(Icons.delete),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 Container(
                   width: double.infinity,

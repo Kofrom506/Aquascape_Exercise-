@@ -4,8 +4,6 @@ import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
 
-import 'about_page.dart';
-
 class AutoPage extends StatefulWidget {
   const AutoPage({Key? key}) : super(key: key);
   @override
