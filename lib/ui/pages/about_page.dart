@@ -1,55 +1,16 @@
+import 'package:aquascape_exercise/shared/theme.dart';
+import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/logo.png',
-                        fit: BoxFit.contain,
-                        height: 32,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "AQUALED",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(right: 15),
-                  child: Image.asset(
-                    'assets/setting.png',
-                    fit: BoxFit.contain,
-                    height: 15,
-                  ),
-                ),
-              ],
-            ),
-          ),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: cBlackColor,
+          appBar: AqualedAppBar(),
           body: Stack(
             children: <Widget>[
-              Container(
-                color: Colors.black,
-              ),
               ListView(
                 children: <Widget>[
                   Container(
@@ -92,7 +53,7 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 40, left: 30),
+                    padding: EdgeInsets.only(top: 40, left: defaultMargin),
                     child: Text(
                       "Exercise FTUI",
                       textAlign: TextAlign.start,
@@ -103,7 +64,7 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5, left: 30),
+                    padding: EdgeInsets.only(top: 5, left: defaultMargin),
                     child: Text(
                       "Exercise FTUI",
                       textAlign: TextAlign.start,
@@ -118,6 +79,5 @@ class AboutPage extends StatelessWidget {
             ],
           )),
     );
-    ;
   }
 }
