@@ -2,6 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 
 class ManualPage extends StatelessWidget {
+  const ManualPage({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: cBlackColor,
+        body: Container(
+          margin: EdgeInsets.all(defaultMargin),
+          child: Column(
+            children: [
+              Lighting(),
+              SizedBox(
+                height: 50,
+              ),
+              SSlide(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Lighting extends StatelessWidget {
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,7 +36,7 @@ class ManualPage extends StatelessWidget {
       decoration: BoxDecoration(),
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Container(
             // margin: EdgeInsets.symmetric(horizontal: defaultMargin),
@@ -101,35 +128,45 @@ class ManualPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                    width: 45,
-                    height: 45,
-                    child: Stack(children: <Widget>[
+                  width: 45,
+                  height: 45,
+                  child: Stack(
+                    children: <Widget>[
                       Positioned(
-                          top: 0,
-                          left: 0,
-                          child: Container(
-                              width: 45,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(45, 45, 45, 1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.elliptical(45, 45)),
-                              ))),
+                        top: 0,
+                        left: 0,
+                        child: Container(
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(45, 45, 45, 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45)),
+                          ),
+                        ),
+                      ),
                       Positioned(
-                          top: 11.5,
-                          left: 12.4755859375,
-                          child: Container(
-                              width: 21.02235984802246,
-                              height: 21.766693115234375,
-                              child: Stack(children: <Widget>[
-                                Positioned(
-                                    top: 0,
-                                    left: 0,
-                                    child: Image.asset(
-                                      'assets/Power.png',
-                                    )),
-                              ]))),
-                    ])),
+                        top: 11.5,
+                        left: 12.4755859375,
+                        child: Container(
+                          width: 21.02235984802246,
+                          height: 21.766693115234375,
+                          child: Stack(
+                            children: <Widget>[
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Image.asset(
+                                  'Power.png',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(width: 10),
                 Container(
                   decoration: BoxDecoration(),
@@ -164,6 +201,12 @@ class ManualPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Switch(
+                  value: isSwitched,
+                  onChanged: (value) {},
+                  activeTrackColor: cDarkOrange,
+                  activeColor: cLightOrange,
                 ),
               ],
             ),

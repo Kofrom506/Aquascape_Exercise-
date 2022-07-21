@@ -2,6 +2,7 @@ import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:aquascape_exercise/ui/pages/about_page.dart';
 import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
 
 class AutoPage extends StatefulWidget {
