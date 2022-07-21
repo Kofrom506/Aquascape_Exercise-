@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PresetListCubit extends Cubit<List<PresetModel>> {
   PresetListCubit() : super([]);
 
-  // bool isJustDeleted = false;
-
   void addPreset(preset) {
     state.add(preset);
     emit(List.from(state));
@@ -14,6 +12,5 @@ class PresetListCubit extends Cubit<List<PresetModel>> {
   void deletePreset(preset) {
     state.remove(preset);
     emit(List.from(state));
-    // isJustDeleted = true;
   }
 }

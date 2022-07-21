@@ -114,12 +114,6 @@ class _MyAddPresetWidgetState extends State<AddPresetWidget> {
                   builder: (context, state) {
                     return BlocBuilder<SelectPresetCubit, String>(
                       builder: (context, state) {
-                        // bool isJustDeleted =
-                        //     context.watch<PresetListCubit>().isJustDeleted;
-                        // print(isJustDeleted);
-                        // if (isJustDeleted) {
-                        //   colorCounter--;
-                        // }
                         colorCounter = 0;
                         buildBox();
                         return Column(children: box);
