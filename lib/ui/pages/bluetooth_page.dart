@@ -13,7 +13,7 @@ class BluetoothPage extends StatelessWidget {
       backgroundColor: cBlackColor,
       //edit body nya yaa
       body: Text(
-        'Ini page buat milih bluetooth',
+        'Ini page buat milihhhhh',
         style: WhiteFont,
       ),
     ));
