@@ -38,6 +38,12 @@ class _AddPresetPageState extends State<AddPresetPage> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    presetNameController.dispose();
+    super.dispose();
+  }
+
   iosDatePicker(BuildContext context, int index, bool isStartActive) {
     showCupertinoModalPopup(
         context: context,
@@ -400,7 +406,9 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       gradient: secondaryGradient,
                       borderRadius: BorderRadius.circular(defaultRadius)),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/');
+                      },
                       child: Text(
                         'Save',
                         style: WhiteFont.copyWith(

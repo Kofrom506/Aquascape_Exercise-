@@ -63,12 +63,21 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
                 SizedBox(
                   height: 32,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                  height: 76,
-                  decoration: BoxDecoration(
-                      gradient: secondaryGradient,
-                      borderRadius: BorderRadius.circular(defaultRadius)),
+                GestureDetector(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                    height: 76,
+                    width: double.infinity,
+                    //ini sementara aja
+                    child: Text(
+                      '  Select bluetooth connection..',
+                      style: WhiteFont,
+                    ),
+                    decoration: BoxDecoration(
+                        gradient: secondaryGradient,
+                        borderRadius: BorderRadius.circular(defaultRadius)),
+                  ),
+                  onTap: () => Navigator.pushNamed(context, '/bluetooth-page'),
                 ),
                 SizedBox(
                   height: 50,

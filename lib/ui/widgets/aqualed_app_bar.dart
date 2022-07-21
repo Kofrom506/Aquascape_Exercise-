@@ -35,8 +35,7 @@ class AqualedAppBar extends StatelessWidget implements PreferredSizeWidget {
           )),
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AboutPage()));
+              Navigator.pushNamed(context, '/about-page');
             },
             child: Container(
               width: 17,
