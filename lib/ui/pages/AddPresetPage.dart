@@ -1,7 +1,7 @@
 import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
 import 'package:aquascape_exercise/model/preset_model.dart';
 import 'package:aquascape_exercise/model/schedule_model.dart';
-import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
+import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar_exit.dart';
 import 'package:aquascape_exercise/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
@@ -74,7 +74,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: cBlackColor,
-        appBar: AqualedAppBar(),
+        appBar: AqualedAppBarExit(),
         body: ListView(children: [
           Container(
             margin: EdgeInsets.all(defaultMargin),
