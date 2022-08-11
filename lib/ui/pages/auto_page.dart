@@ -1,9 +1,10 @@
+import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:aquascape_exercise/ui/pages/about_page.dart';
 import 'package:aquascape_exercise/ui/pages/add_preset_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AutoPage extends StatefulWidget {
   const AutoPage({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-
+    // context.read<PresetListCubit>().init();
+    context.read<PresetListCubit>().fetchPresets();
     super.initState();
   }
 

@@ -1,8 +1,14 @@
 import 'package:aquascape_exercise/model/schedule_model.dart';
+import 'package:hive/hive.dart';
+part 'preset_model.g.dart';
 
-class PresetModel {
+@HiveType(typeId: 1)
+class PresetModel extends HiveObject {
+  @HiveField(0)
   String id;
+  @HiveField(1)
   String presetName;
+  @HiveField(2)
   List<ScheduleModel>? schedules;
 
   PresetModel(
