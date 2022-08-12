@@ -18,8 +18,9 @@ class AddPresetPage extends StatefulWidget {
 }
 
 class _AddPresetPageState extends State<AddPresetPage> {
-  _AddPresetPageState(this.preset);
-  PresetModel preset;
+  _AddPresetPageState(this.realPreset);
+  PresetModel realPreset;
+  late PresetModel preset;
 
   //preset name controller
   final TextEditingController presetNameController =
@@ -27,6 +28,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
 
   @override
   void initState() {
+    preset = PresetModel.copyWith(realPreset);
     String presetName = preset.presetName;
     presetNameController.addListener(() {
       //use setState to rebuild the widget
@@ -101,7 +103,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                             onPressed: () {
                               context
                                   .read<PresetListCubit>()
-                                  .deletePreset(this.preset);
+                                  .deletePreset(this.realPreset);
                               Navigator.pushNamedAndRemoveUntil(
                                   context, '/', (route) => false);
                             },
@@ -407,6 +409,11 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       borderRadius: BorderRadius.circular(defaultRadius)),
                   child: TextButton(
                       onPressed: () {
+                        realPreset.presetName = preset.presetName;
+                        realPreset.schedules = preset.schedules;
+                        context
+                            .read<PresetListCubit>()
+                            .updatePreset(realPreset);
                         Navigator.pushNamed(context, '/');
                       },
                       child: Text(
