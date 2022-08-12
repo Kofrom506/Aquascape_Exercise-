@@ -103,7 +103,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                             onPressed: () {
                               context
                                   .read<PresetListCubit>()
-                                  .deletePreset(this.preset);
+                                  .deletePreset(this.realPreset);
                               Navigator.pushNamedAndRemoveUntil(
                                   context, '/', (route) => false);
                             },
@@ -411,7 +411,9 @@ class _AddPresetPageState extends State<AddPresetPage> {
                       onPressed: () {
                         realPreset.presetName = preset.presetName;
                         realPreset.schedules = preset.schedules;
-
+                        context
+                            .read<PresetListCubit>()
+                            .updatePreset(realPreset);
                         Navigator.pushNamed(context, '/');
                       },
                       child: Text(

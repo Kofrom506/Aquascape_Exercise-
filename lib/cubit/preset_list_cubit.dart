@@ -23,8 +23,13 @@ class PresetListCubit extends Cubit<List<PresetModel>> {
     emit(List.from(state));
   }
 
-  void deletePreset(preset) {
+  void deletePreset(preset) async {
     state.remove(preset);
+    await _presetService.deletePreset(preset);
     emit(List.from(state));
+  }
+
+  void updatePreset(preset) async {
+    await _presetService.updatePreset(preset);
   }
 }

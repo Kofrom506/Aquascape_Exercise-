@@ -22,9 +22,9 @@ class PresetModel extends HiveObject {
   }
 
   static PresetModel copyWith(PresetModel presetModel) {
+    List<ScheduleModel> newList = [...presetModel.schedules!];
+
     return PresetModel(
-        id: '',
-        presetName: presetModel.presetName,
-        schedules: presetModel.schedules);
+        id: '', presetName: presetModel.presetName, schedules: newList);
   }
 }
