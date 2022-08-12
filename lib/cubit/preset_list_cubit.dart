@@ -6,14 +6,14 @@ class PresetListCubit extends Cubit<List<PresetModel>> {
   PresetListCubit() : super([]);
   late PresetService _presetService;
 
-  // void init() async {
-  //   await _presetService.init();
-  // }
-
-  void fetchPresets() async {
+  void init() async {
     _presetService = PresetService();
-    List<PresetModel> presetList = await _presetService.fetchPresets();
-    // if (presetList == null) emit([]);
+    await _presetService.init();
+    fetchPresets();
+  }
+
+  void fetchPresets() {
+    List<PresetModel> presetList = _presetService.fetchPresets();
     emit(presetList);
   }
 

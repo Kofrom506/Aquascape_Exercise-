@@ -1,23 +1,14 @@
 import 'package:aquascape_exercise/model/preset_model.dart';
-import 'package:aquascape_exercise/model/schedule_model.dart';
 import 'package:hive/hive.dart';
 
 class PresetService {
   late Box<PresetModel> _presets;
 
-  // Future<void> init() async {
-  //   _presets = await Hive.openBox<PresetModel>('PresetTable');
-  //   // _presets.add(PresetModel(id: 'podaodao'));
-  //   // _presets.add(PresetModel(id: 'asaascd'));
-  //   // if (_presets.isEmpty) {
-  //   //   _presets.add(PresetModel(id: 'asaascd'));
-  //   // }
-  // }
-
-  Future<List<PresetModel>> fetchPresets() async {
+  Future<void> init() async {
     _presets = await Hive.openBox<PresetModel>('PresetTable');
-    // await _presets.clear();
-    // _presets.add(PresetModel(id: 'podaodao'));
+  }
+
+  List<PresetModel> fetchPresets() {
     return _presets.values.toList();
   }
 

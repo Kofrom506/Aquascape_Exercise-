@@ -17,8 +17,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-    // context.read<PresetListCubit>().init();
-    context.read<PresetListCubit>().fetchPresets();
+    context.read<PresetListCubit>().init();
     super.initState();
   }
 
