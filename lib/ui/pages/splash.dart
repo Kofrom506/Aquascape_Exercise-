@@ -1,11 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class Splash extends StatelessWidget {
+class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/auto-page', (route) => false);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           color: const Color(0xff121212),
@@ -14,14 +31,14 @@ class Splash extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset(
-                  'images/Light.png',
+                  'assets/Light.png',
                   fit: BoxFit.cover,
                 ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'images/Logo_Text.png',
+                  'assets/Logo_Text.png',
                   fit: BoxFit.cover,
                 ),
               ),
