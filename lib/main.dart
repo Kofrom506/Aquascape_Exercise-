@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => Splash(),
           '/auto-page': (context) => AutoPage(),
-          '/bluetooth-page': (context) => BluetoothPage(),
+          '/bluetooth-page': (context) => DiscoveryPage(),
           '/about-page': (context) => AboutPage(),
         },
       ),
