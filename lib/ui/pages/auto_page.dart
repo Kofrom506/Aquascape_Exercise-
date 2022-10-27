@@ -1,4 +1,6 @@
+import 'package:aquascape_exercise/cubit/bluetooth_cubit.dart';
 import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
+import 'package:aquascape_exercise/model/bluetooth_model.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
 import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
@@ -18,6 +20,7 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     context.read<PresetListCubit>().init();
+    context.read<BluetoothCubit>().init();
     super.initState();
   }
 
@@ -65,21 +68,34 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
                 SizedBox(
                   height: 32,
                 ),
-                GestureDetector(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                    height: 76,
-                    width: double.infinity,
-                    //ini sementara aja
-                    child: Text(
-                      '  Select bluetooth connection..',
-                      style: WhiteFont,
-                    ),
-                    decoration: BoxDecoration(
-                        gradient: secondaryGradient,
-                        borderRadius: BorderRadius.circular(defaultRadius)),
-                  ),
-                  onTap: () => Navigator.pushNamed(context, '/bluetooth-page'),
+                BlocConsumer<BluetoothCubit, BluetoothModel>(
+                  listener: (context, state) {
+                    print('bluetooth id:' + state.bluetoothId);
+                  },
+                  builder: (context, state) {
+                    return GestureDetector(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                        height: 76,
+                        width: double.infinity,
+                        //ini sementara aja
+                        child: Text(
+                          '  Select bluetooth connection..',
+                          style: WhiteFont,
+                        ),
+                        decoration: BoxDecoration(
+                            gradient: secondaryGradient,
+                            borderRadius: BorderRadius.circular(defaultRadius)),
+                      ),
+                      onTap: () {
+                        // context
+                        //     .read<BluetoothCubit>()
+                        //     .setCurrentBluetooth(new BluetoothModel());
+                        print('bluetooth id:' + state.bluetoothId);
+                        Navigator.pushNamed(context, '/bluetooth-page');
+                      },
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 50,

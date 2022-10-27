@@ -1,3 +1,4 @@
+import 'package:aquascape_exercise/cubit/bluetooth_cubit.dart';
 import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
 import 'package:aquascape_exercise/cubit/select_preset_cubit.dart';
 import 'package:aquascape_exercise/model/preset_model.dart';
@@ -9,6 +10,7 @@ import 'package:aquascape_exercise/ui/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'model/bluetooth_model.dart';
 import 'ui/pages/auto_page.dart';
 
 Future<void> main() async {
@@ -16,6 +18,7 @@ Future<void> main() async {
 
   Hive.registerAdapter(PresetModelAdapter());
   Hive.registerAdapter(ScheduleModelAdapter());
+  Hive.registerAdapter(BluetoothModelAdapter());
   // await PresetService().init();
   runApp(MyApp());
 }
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => SelectPresetCubit()),
         BlocProvider(create: (context) => PresetListCubit()),
+        BlocProvider(create: (context) => BluetoothCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
