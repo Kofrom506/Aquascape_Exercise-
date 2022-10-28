@@ -14,6 +14,7 @@ class BluetoothService {
   }
 
   BluetoothModel fetchCurrentBluetooth() {
+    if (_bluetooth.isEmpty) setCurrentBluetooth(new BluetoothModel());
     return _bluetooth.values.elementAt(0);
   }
 
