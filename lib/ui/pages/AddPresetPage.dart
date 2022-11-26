@@ -105,7 +105,7 @@ class _AddPresetPageState extends State<AddPresetPage> {
                                   .read<PresetListCubit>()
                                   .deletePreset(this.realPreset);
                               Navigator.pushNamedAndRemoveUntil(
-                                  context, '/', (route) => false);
+                                  context, '/auto-page', (route) => false);
                             },
                             icon: Icon(Icons.delete),
                           ),

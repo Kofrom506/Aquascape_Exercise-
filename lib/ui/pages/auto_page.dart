@@ -2,6 +2,7 @@ import 'package:aquascape_exercise/cubit/bluetooth_cubit.dart';
 import 'package:aquascape_exercise/cubit/preset_list_cubit.dart';
 import 'package:aquascape_exercise/model/bluetooth_model.dart';
 import 'package:aquascape_exercise/shared/theme.dart';
+import 'package:aquascape_exercise/ui/pages/bluetooth_page.dart';
 import 'package:aquascape_exercise/ui/pages/manual_page.dart';
 import 'package:aquascape_exercise/ui/widgets/aqualed_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class AutoPage extends StatefulWidget {
 
 class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
   TabController? _tabController;
+  bool refreshPage = true;
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
@@ -76,12 +78,46 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
                     return GestureDetector(
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                         height: 76,
                         width: double.infinity,
-                        //ini sementara aja
-                        child: Text(
-                          '  Select bluetooth connection..',
-                          style: WhiteFont,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Status:',
+                                  style: WhiteFont.copyWith(fontWeight: bold),
+                                ),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                Text(
+                                  context
+                                          .watch<BluetoothCubit>()
+                                          .isConnectedAlready
+                                      ? 'Connected'
+                                      : 'Not Connected',
+                                  style: WhiteFont,
+                                ),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                Icon(
+                                  Icons.circle_rounded,
+                                  size: 17,
+                                  color: cGreenColor,
+                                ),
+                              ],
+                            ),
+                            context.watch<BluetoothCubit>().isConnectedAlready
+                                ? Text(
+                                    state.bluetoothId,
+                                    style: WhiteFont,
+                                  )
+                                : SizedBox()
+                          ],
                         ),
                         decoration: BoxDecoration(
                             gradient: secondaryGradient,
@@ -92,7 +128,8 @@ class _AutoPageState extends State<AutoPage> with TickerProviderStateMixin {
                         //     .read<BluetoothCubit>()
                         //     .setCurrentBluetooth(new BluetoothModel());
                         print('bluetooth id:' + state.bluetoothId);
-                        Navigator.pushNamed(context, '/bluetooth-page');
+                        Navigator.pushNamed(context, '/bluetooth-page')
+                            .then((_) => context.read<BluetoothCubit>().init());
                       },
                     );
                   },
